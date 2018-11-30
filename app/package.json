@@ -1,0 +1,42 @@
+{
+  "name": "cloudmesh-app",
+  "version": "1.0.0",
+  "description": "Cloudemesh v4 app",
+  "main": "main.js",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack && webpack-dev-server",
+    "start": "webpack && electron ."
+  },
+  "repository": "https://github.com/cloudmesh-community/fa18-516-21/tree/master/project-code/app",
+  "keywords": [
+    "Cloudmesh"
+  ],
+  "author": "Mihir Shanishchara, Vineet Barshikar",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "autoprefixer": "^9.1.5",
+    "babel-loader": "^8.0.4",
+    "css-loader": "^1.0.0",
+    "electron": "^3.0.9",
+    "electron-builder": "^20.28.4",
+    "extract-loader": "^3.0.0",
+    "file-loader": "^2.0.0",
+    "node-sass": "^4.9.3",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  },
+  "dependencies": {
+    "backbone": "^1.3.3",
+    "handlebars": "^4.0.12",
+    "handlebars-loader": "^1.7.0",
+    "jquery": "^3.3.1",
+    "material-components-web": "^0.40.1",
+    "underscore": "^1.9.1"
+  }
+}

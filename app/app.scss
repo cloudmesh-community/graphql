@@ -1,0 +1,181 @@
+@import '@material/ripple/mdc-ripple';
+@import "@material/drawer/mdc-drawer";
+@import "@material/list/mdc-list";
+@import "@material/textfield/mdc-text-field";
+@import "@material/layout-grid/mdc-layout-grid";
+@import "@material/typography/mdc-typography";
+@import "@material/button/mdc-button";
+@import "@material/card/mdc-card";
+@import "@material/tab-bar/mdc-tab-bar";
+@import "@material/tab-scroller/mdc-tab-scroller";
+@import "@material/tab-indicator/mdc-tab-indicator";
+@import "@material/tab/mdc-tab";
+@import "@material/list/mdc-list";
+@import "@material/menu-surface/mdc-menu-surface";
+@import "@material/menu/mdc-menu";
+@import "@material/dialog/mdc-dialog";
+@import "@material/snackbar/mdc-snackbar";
+
+body{
+    margin: 0
+}
+
+/* Copied from https://material-components.github.io/material-components-web-catalog/static/css/styles/App.scss*/
+.mdc-typography {
+    font-family: Roboto, sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased; 
+}
+
+.mdc-typography--headline6 {
+    font-family: Roboto, sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-size: 1.25rem;
+    line-height: 2rem;
+    font-weight: 500;
+    letter-spacing: 0.0125em;
+    text-decoration: inherit;
+    text-transform: inherit; 
+}
+
+.mdc-typography--subtitle2 {
+    font-family: Roboto, sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    font-weight: 500;
+    letter-spacing: 0.00714em;
+    text-decoration: inherit;
+    text-transform: inherit; 
+}
+
+.mdc-typography--body2 {
+    font-family: Roboto, sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 400;
+    letter-spacing: 0.01786em;
+    text-decoration: inherit;
+    text-transform: inherit; 
+}
+/* Copy complete */
+
+/* App custom css */
+.root-frame {
+    display: flex;
+    height: 100vh;
+}
+
+.drawer-top-app-bar {
+    position: absolute;
+}
+
+.drawer-main-content {
+    overflow-x: hidden;
+    overflow-y: scroll; 
+    padding: 0 18px;
+    width: 100%;
+    height: 100%;
+}
+
+.login-root {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    width: 450px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 10%;
+}
+
+.login-content {
+    height: auto;
+    min-height: 500px;
+    padding: 35px 35px 0 35px;
+    text-align: center;
+}
+
+.login-logo {
+    font-size: 2.5em;
+}
+
+.login-form {
+    padding-top: 30%;
+}
+
+.login-footer {
+    margin-top: 40%;
+}
+
+.icon-button {
+    background: transparent;
+    border: 0;
+}
+
+.card-body-padding {
+    padding: 0 1em;
+}
+
+.mdc-card {
+    .mdc-card__action-buttons {
+        display: block;
+    }
+
+    .mdc-button {
+        margin: 5px;
+    }
+
+    .mdc-card__action--icon {
+        padding: 4px;
+    }
+
+    .mdc-typography--headline6 {
+        font-size: 1.15vw;
+        font-weight: 600;
+    }
+}
+
+.content {
+    display: none;
+}
+  
+.content--active {
+    display: block;
+}
+
+.material-icons {
+    color: #6200ee !important;
+}
+
+
+.divTable{
+    display: table;
+    border: 1px solid #999999;
+    
+    .divTableBody {
+        display: table-row-group;
+
+        .divTableRow {
+            display: table-row;
+
+            .divTableCell, .divTableHead {
+                border: 1px solid #999999;
+                display: table-cell;
+                padding: 4px;
+                vertical-align: middle;
+                
+                .mdc-card__action--icon { 
+                    padding: 8px;
+                }
+            }
+        }
+    }
+}
