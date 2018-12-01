@@ -1,6 +1,6 @@
 # Cloudmesh App #
 
-This is project for Cloudmesh GUI using electronjs and backend using graphql-django-python.
+This is project for Cloudmesh GUI using electronjs and backend using graphql-flask-python.
 
 ## Quick start
 
