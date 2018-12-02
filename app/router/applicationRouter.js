@@ -1,6 +1,8 @@
 import Login from "../smart-views/login";
 import App from "../smart-views/app";
 import VMs from "../smart-views/vms";
+import Images from "../smart-views/images";
+import dispatcher from "../util/dispatcher";
 
 export default class ApplicationRouter {
     constructor () {
@@ -8,6 +10,7 @@ export default class ApplicationRouter {
             "login": this.login,
             "app": this.app,
             "selectvm": this.vms,
+            "images": this.images
         };
     }
 
@@ -34,7 +37,17 @@ export default class ApplicationRouter {
         if(!this.vmView){
             this.vmView = new VMs();
         }
+        dispatcher.trigger('removeChildViews');
         this.vmView.setElement(".drawer-main-content-body").render();
         document.getElementById("title").innerHTML = "VM List";
+    }
+
+    images() {
+        if(!this.imageView){
+            this.imageView = new Images();
+        }
+        dispatcher.trigger('removeChildViews');
+        this.imageView.setElement(".drawer-main-content-body").render();
+        document.getElementById("title").innerHTML = "Image List";
     }
 }

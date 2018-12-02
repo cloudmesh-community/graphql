@@ -14,6 +14,7 @@ export default class VMs extends Backbone.View {
         super();
         this.tabsView = new Tabs({
             triggerName: "vmTabSelected",
+            showSortOptions: true,
             tabs: ["AWS", "Azure"]
         });
         dispatcher.on("vmTabSelected", this.tabSelected, this);
@@ -21,6 +22,7 @@ export default class VMs extends Backbone.View {
         dispatcher.on("showDetails", this.showDetails, this);
         dispatcher.on("updateVMDataClick", this.updateMongoDB, this);
         dispatcher.on("sortCards", this.sortCards, this);
+        dispatcher.on("removeChildViews", this.removeChildren, this);
         this.pageInfo = {};
         this.selectedTab = "aws";
         this.isLoading = false;
@@ -57,12 +59,13 @@ export default class VMs extends Backbone.View {
         this.$el.html(template());
         this.tabsView.setElement("#vmTabs").render();
         this.tabSelected("aws");
-        this.updateVMButton.setElement("#actionButtons").render();
+        $("#actionButtons").html("<div id='vmActions'></div>");
+        this.updateVMButton.setElement("#vmActions").render();
     }
 
     tabSelected(name) {
         if (this.edges[name] && this.edges[name].length > 0) {
-            dispatcher.trigger("showCards", this.edges[name]);
+            dispatcher.trigger("showCards", this.edges[name], "vm");
             return;
         }
         this.selectedTab = name;
@@ -85,7 +88,7 @@ export default class VMs extends Backbone.View {
         Api.post(vmQuery).then((res) => {
             this.pageInfo[this.selectedTab] = res.data[vm.clause].pageInfo;
             this.edges[this.selectedTab].push(...res.data[vm.clause].edges);
-            dispatcher.trigger("showCards", this.edges[this.selectedTab]);
+            dispatcher.trigger("showCards", this.edges[this.selectedTab], "vm");
         });
     }
 
@@ -121,7 +124,7 @@ export default class VMs extends Backbone.View {
         Api.post(vmQuery).then((res) => {
             this.pageInfo[name] = res.data[vm.clause].pageInfo;
             this.edges[name].push(...res.data[vm.clause].edges);
-            dispatcher.trigger("showCards", this.edges[name]);
+            dispatcher.trigger("showCards", this.edges[name], "vm");
             this.isLoading = false;
         });
     }
@@ -162,8 +165,13 @@ export default class VMs extends Backbone.View {
             Api.post(vmQuery).then((res) => {
                 this.pageInfo[this.selectedTab] = res.data[queryName].pageInfo;
                 this.edges[this.selectedTab] = res.data[queryName].edges;
-                dispatcher.trigger("showCards", this.edges[this.selectedTab]);
+                dispatcher.trigger("showCards", this.edges[this.selectedTab], "vm");
             });
         }
+    }
+
+    removeUpdateVMButton() {
+        this.updateVMButton.remove();
+        this.tabsView.remove();
     }
 }

@@ -24,7 +24,8 @@ export default class Tabs extends Backbone.View {
 
     render() {
         this.$el.html(template({
-            tabs: this.options.tabs
+            tabs: this.options.tabs,
+            showSortOptions: this.options.showSortOptions
         }));
         var tabBar = new MDCTabBar(document.querySelector('.mdc-tab-bar'));
         var contentEls = document.querySelectorAll('.content');
@@ -32,7 +33,9 @@ export default class Tabs extends Backbone.View {
             document.querySelector('.content--active').classList.remove('content--active');
             contentEls[event.detail.index].classList.add('content--active');
         });
-        this.menu = new MDCMenu(document.querySelector('.mdc-menu'));
+        if(this.options.showSortOptions) {
+            this.menu = new MDCMenu(document.querySelector('.mdc-menu'));
+        }
         this.selectedTab = "aws";
     }
 
@@ -54,13 +57,15 @@ export default class Tabs extends Backbone.View {
         dispatcher.trigger(this.options.triggerName, this.selectedTab);
     }
 
-    showCards(edges) {
+    showCards(edges, parentView) {
         this.$el.find('.content--active').html(gridLayout({
             edges: edges,
-            view: this.currentView || 'card'
+            view: this.currentView || 'card',
+            parentView: parentView
         }));
         _.each(edges, (edge) => {
-            new Card({edge: edge, type: this.selectedTab, view: this.currentView || 'card'}).setElement("[id='"+ edge.node.host +"']").render();
+            let cardId = parentView === "vm" ? edge.node.host : edge.node.name;
+            new Card({edge: edge, type: this.selectedTab, view: this.currentView || 'card', parentView: parentView}).setElement("[id='"+ cardId +"']").render();
         });
     }
 }

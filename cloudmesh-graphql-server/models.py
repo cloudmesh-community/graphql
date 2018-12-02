@@ -38,3 +38,5 @@ class AWSImage(Document):
     meta = {'collection':'awsImage'}
     extra = DictField()
     name = StringField()
+    publisher = StringField()
+    location = StringField()
