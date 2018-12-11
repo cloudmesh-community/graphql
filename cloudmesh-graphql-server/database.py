@@ -1,12 +1,38 @@
 from mongoengine import connect
-from models import AWS
-from models import Azure
+from models import AWS, Azure, AzureImage, AWSImage
 from faker import Faker
 import json
 
 fake = Faker()
 # You can connect to a real mongo server instance by your own.
 connect('cm4', host='mongodb://cm4-user:cm4Us6r@ds151393.mlab.com:51393/cm4', alias='default')
+
+# init_aws, init_azure and init_awsImage functions are generating fake data using faker. To replace this with actual cm4 data we can do following
+# 
+# Pseudo code:
+# import cm4
+# import cm4.vm.Vm
+# from cm4.configuration.config import Config
+# from models import AWS
+#
+# def getAWSVM_List():
+#   config = Config()
+#   default_cloud = config.data["cloudmesh"]["default"]["cloud"]
+#   vm = Vm(default_cloud)
+#   vm_list = vm.nodes()
+#   for item in vm_list:
+#       aws = AWS(
+#            host=item.hostname,
+#            region=item.region,
+#            image=item.image,
+#            name=item.name,
+#            state=item.state,
+#            extra=item.extra)
+#       aws.save()
+# 
+# vm.nodes will return some JSON structure which is similar to what faker is generating. So we can just iterate over each item
+# in vm list and save it to mongodb for app. This getAWSVM_List will only get called when user click "Update VM Data" button in app.
+# On click of that button resolve_fetchAWSData in schema.py will call getAWSVM_List function.
 
 def init_aws():
     for i in range(1, 20):
@@ -135,3 +161,50 @@ def init_azure():
                 "type": "Microsoft.Compute/virtualMachines" \
                 }'))
         azure.save()
+
+def init_awsImage():
+    aws_Image = AWSImage(
+        location=fake.word(ext_word_list=['us-east-2','us-east-1','us-west-1','us-west-2','us-gov-east-1','us-gov-west-1']),
+        name="UbuntuServer 16.04-LTS",
+        publisher="Canonical",
+        extra=json.loads('{ \
+            "architecture": "x86_64", \
+            "billing_products": [], \
+            "block_device_mapping": [{ \
+                    "device_name": "/dev/sda1", \
+                    "ebs": { \
+                        "delete": "true",\
+                        "iops": "",\
+                        "snapshot_id": "snap-0576704bcf883d5ee",\
+                        "volume_id": "None",\
+                        "volume_size": 8,\
+                        "volume_type": "gp2"\
+                    },\
+                    "virtual_name": "None"\
+                },\
+                {\
+                    "device_name": "/dev/sdb",\
+                    "virtual_name": "ephemeral0"\
+                },\
+                {\
+                    "device_name": "/dev/sdc",\
+                    "virtual_name": "ephemeral1"\
+                }\
+            ],\
+            "description": "Canonical, Ubuntu, 16.04 LTS, amd64 xenial image ",\
+            "build_on": "2018-09-12",\
+            "ena_support": "true",\
+            "hypervisor": "xen",\
+            "image_location": "099720109477/ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-20180912",\
+            "image_type": "machine",\
+            "is_public": "true",\
+            "kernel_id": "",\
+            "owner_alias": "",\
+            "owner_id": "099720109477",\
+            "root_device_type": "ebs",\
+            "sriov_net_support": "simple",\
+            "state": "available",\
+            "tags": {},\
+            "virtualization_type": "hvm"}')
+    )
+    aws_Image.save()
