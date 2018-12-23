@@ -3,6 +3,7 @@ const autoprefixer = require('autoprefixer');
 
 module.exports = [{
   entry: ['./renderer.js', './app.scss'],
+  mode: 'none',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
