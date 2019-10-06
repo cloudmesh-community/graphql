@@ -1,0 +1,39 @@
+definitions:
+  VM:
+    type: object
+    properties:
+      provider:
+        type: string
+        description: Name of the provider
+      id:
+        type: string
+        description: a unique id for the vm
+      name:
+        type: string
+        description: the name of the vm
+      image:
+        type: string
+        description: the image for the vm
+        x-faker: cloudmesh_faker.list(['CC-Ubuntu16.04','CC-Ubuntu14.04','CC-Ubuntu18.04','CC-Ubuntu12.04'])
+      region:
+        type: string
+        description: an optional region
+        x-faker: cloudmesh_faker.list(['West Central US','West US 2','East US 2','East US','North Central US','South Central US','Central US','West US'])
+      size:
+        type: string
+        description: The size of the vm
+      state:
+        type: string
+        description: The state of the vm
+        x-faker: cloudmesh_faker.list(['Starting','Running','Stopping','Stopped','Deallocating','Deallocated'])
+      private_ips:
+        type: string
+        description: The private IPs
+        x-faker: cloudmesh_faker.unique_ip("[24-96].0.0.[1-128]")
+      public_ips:
+        type: string
+        description: The public IPS
+        x-faker: cloudmesh_faker.unique_ip("[127-255].0.0.[1-255]")
+      metadata:
+        type: string
+        description: The meta data passed along to the VM

@@ -3,3 +3,5 @@ Flask-GraphQL
 graphene-mongo
 flask-cors
 faker
+ruamel.yaml
+numpy
