@@ -23,13 +23,13 @@ See our documentation of pyenv in ... :o: add link to book here
 
 #### Python 3 
 
-:o: Is this properly done ?
+Execute following commands in workspace
 
 ```bash
-python3 -m venv cloudmesh
+python3 -m venv cloudmesh-graphql-server
+cd cloudmesh-graphql-server
 source bin/activate
 ```
-
 
 ## Installation
 
